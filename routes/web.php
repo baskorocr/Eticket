@@ -21,3 +21,10 @@ Route::get('/konfirmasi/{id}', [App\Http\Controllers\Karyawan::class, 'konfirmas
 Route::post('/konfirmasiPost', [App\Http\Controllers\Karyawan::class, 'konfirmasiPost'])->name('konfirmasiPost');
 Route::get('/cekTiket', [App\Http\Controllers\Karyawan::class, 'cekTiket'])->name('cekTiket');
 Route::post('/cekTiketPost', [App\Http\Controllers\Karyawan::class, 'cekTiketPost'])->name('cekTiketPost');
+Auth::routes();
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+});
