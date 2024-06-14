@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
     <meta name="keywords"
         content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, AdminWrap lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, AdminWrap lite design, AdminWrap lite dashboard bootstrap 5 dashboard template">
     <meta name="description"
@@ -17,10 +17,10 @@
     <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('../assets/images/favicon.png') }}">
-    {{ asset('assets/css/fontawesome.css') }}
+
     
     <!-- Bootstrap Core CSS -->
-    <link href=" {{ asset('./assets/node_modules/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href=" {{ asset('/assets/node_modules/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href=" {{ asset('./assets/node_modules/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
     <!-- This page CSS -->
     <!-- chartist CSS -->
