@@ -102,13 +102,7 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                           <li class="nav-item dropdown">
-                                <p id="navbarDropdown"  aria-expanded="false" v-pre>
-                                    <h5>{{ Auth::user()->name }}</h5>
-                                </p>
-
-                               
-                            </li>
+                          <h5 class="" style="margin-right:40px; padding-bottom:10px; ">{{ Auth::user()->name }}</h5>
                         
                     </ul>
                 </div>
@@ -129,11 +123,9 @@
                         <li> <a class="waves-effect waves-dark" href="{{ url('home') }}" aria-expanded="false"><i
                                     class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="{{ url('scan') }}" aria-expanded="false"><i
-                                    class="fa fa-user-circle-o"></i><span class="hide-menu">Scan Kehadiran</span></a>
-                        </li>
+                      
                         <li> <a class="waves-effect waves-dark" href="table-basic.html" aria-expanded="false"><i
-                                    class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                                    class="fa fa-pencil"></i><span class="hide-menu">Kehadiran Manual</span></a>
                         </li>
                         <li> <a class="waves-effect waves-dark" href="icon-fontawesome.html" aria-expanded="false"><i
                                     class="fa fa-smile-o"></i><span class="hide-menu">Icons</span></a>
@@ -146,7 +138,7 @@
                         </li>
                        <li>
         <a class="waves-effect waves-dark" href="{{ route('logout') }}" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fa fa-question-circle"></i>
+            <i class="fa fa-sign-out"></i>
             <span class="hide-menu">Logout</span>
         </a>
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

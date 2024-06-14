@@ -13,10 +13,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <div class="col-md-7 align-self-center">
-                        <a href={{ url('scan') }}
-                            class="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down text-white"> Scan Kehadiran</a>
-                    </div>
+                   
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -24,6 +21,62 @@
                 <!-- ============================================================== -->
                 <!-- Sales Chart and browser state-->
                 <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body text-center ">
+                                <h4 class="card-title text-center">Please Scan on QR Code Position</h4>
+                        
+                                 <div class="d-flex justify-content-center">
+                                    <div id="reader" style="width:300px; height:300px; margin-bottom: 180px"></div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Table Presensi Kehadiran</h4>
+                             
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th>Id</th>
+                                                <th>NPK</th>
+                                                <th>Name</th>
+                                                <th>Hadir</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @foreach ($data as $registrasi)
+
+                                           <tr>
+                                                <td>
+                                                   {{ $registrasi->id}}
+                                                </td>
+                                                <td>
+                                                   {{ $registrasi->NPK}}
+                                                </td>
+                                                <td>
+                                                   {{ $registrasi->karyawan}}
+                                                </td>
+                                                 <td>
+                                                   {{ $registrasi->hadir}}
+                                                </td>
+                                           </tr>
+                                           @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <!-- Column -->
                     
@@ -54,67 +107,7 @@
                 <!-- End Sales Chart -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Table Presensi Kehadiran</h4>
-                             
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->

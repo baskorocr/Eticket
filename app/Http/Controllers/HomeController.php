@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $registrasis = DB::table('registrasis')
+            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->where('registrasis.hadir', 1)
+            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan')
+            ->get();
+        return view('home', ['data'=> $registrasis]);
     }
 }

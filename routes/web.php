@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/scan', [App\Http\Controllers\Scan::class, 'index'])->name('scan');
+    Route::post('/postScanPresensi', [App\Http\Controllers\Scan::class, 'postScanPresensi'])->name('postScanPresensi');
 
 
 });
