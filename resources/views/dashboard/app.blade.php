@@ -103,21 +103,11 @@
                         <!-- Profile -->
                         <!-- ============================================================== -->
                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <p id="navbarDropdown"  aria-expanded="false" v-pre>
                                     <h5>{{ Auth::user()->name }}</h5>
-                                </a>
+                                </p>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                       <h5> {{ __('Logout') }}</h5>
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                               
                             </li>
                         
                     </ul>
@@ -154,9 +144,15 @@
                         <li> <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false"><i
                                     class="fa fa-bookmark-o"></i><span class="hide-menu">Blank</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="pages-error-404.html" aria-expanded="false"><i
-                                    class="fa fa-question-circle"></i><span class="hide-menu">404</span></a>
-                        </li>
+                       <li>
+        <a class="waves-effect waves-dark" href="{{ route('logout') }}" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fa fa-question-circle"></i>
+            <span class="hide-menu">Logout</span>
+        </a>
+         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    </li>
                     </ul>
                     <div class="text-center mt-4">
                         <a href="https://www.wrappixel.com/templates/adminwrap/"
@@ -214,7 +210,7 @@
     <!-- ============================================================== -->
     <!--morris JavaScript -->
     <script src="{{ asset('./assets/node_modules/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('./assets/node_modules/morrisjs/morris.min.js') }}"></script>
+ 
     <!--c3 JavaScript -->
     <script src="{{ asset('./assets/node_modules/d3/d3.min.js') }}"></script>
     <script src="{{ asset('./assets/node_modules/c3-master/c3.min.js') }}"></script>
