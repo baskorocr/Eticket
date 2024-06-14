@@ -28,7 +28,7 @@
                                 <h4 class="card-title text-center">Please Scan on QR Code Position</h4>
                         
                                  <div class="d-flex justify-content-center">
-                                    <div id="reader" style="width:300px; height:300px;"></div>
+                                    <div id="reader" style="width:300px; height:300px; margin-bottom: 300px"></div>
                                  </div>
                             </div>
                         </div>
