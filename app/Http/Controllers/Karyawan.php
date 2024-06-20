@@ -58,7 +58,7 @@ class Karyawan extends Controller
     {
 
       
-      
+    
 
         $uuid = Str::uuid();
         try {
@@ -67,29 +67,14 @@ class Karyawan extends Controller
                 registrasi::create([
                 'id' => $uuid,
                 'NPK' => $request->npk,
-                'Nomer' => $request->wa,
-                'Bersedia' => $request->select,
-                'TambahanSpouse' => $request->spouse,
-                'TambahanChildren'=> $request->children,
+                'totalKeluarga'=> $request->totalKeluarga,
                 'Transportasi' => $request->additionalSelect,
                 'titikJemput' => $request->jemputSelect,
-                'Baju' => $request->baju
+
             ]);
             }
             
-            elseif($request->select == 'tidak'){
-                registrasi::create([
-                'id' => $uuid,
-                'NPK' => $request->npk,
-                'Nomer' => $request->wa,
-                'Bersedia' => $request->select,
-                'TambahanSpouse' => NULL,
-                'TambahanChildren'=> NULL,
-                'Transportasi' => NULL,
-                'titikJemput' => NULL,
-                'Baju' => NULL
-            ]);
-            }
+          
 
             $request->session()->flash('regstrasi', 'Registrasi Berhasil');
             return redirect()->to(url('/') . '/#register');
@@ -106,7 +91,7 @@ class Karyawan extends Controller
 
     public function cekTiketPost(Request $request)
     {
-        $data = DB::table('registrasis')->join('karyawan', 'registrasis.NPK', '=', 'karyawan.NPK')->select("registrasis.NPK", "registrasis.id", "registrasis.TambahanSpouse","registrasis.TambahanChildren", "registrasis.Transportasi", "registrasis.titikJemput", "registrasis.Baju", "karyawan.namaKaryawan", "karyawan.Spouse", "karyawan.Children")->where('registrasis.NPK','=',$request->npk)->where('registrasis.Bersedia','=','bersedia')->get();
+        $data = DB::table('registrasis')->join('karyawan', 'registrasis.NPK', '=', 'karyawan.NPK')->select("registrasis.NPK", "registrasis.id", "registrasis.Transportasi", "registrasis.totalKeluarga", "registrasis.titikJemput", "karyawan.namaKaryawan", )->where('registrasis.NPK','=',$request->npk)->get();
         $count = count($data);
 
         if($count != 0){

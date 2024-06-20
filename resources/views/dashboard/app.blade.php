@@ -124,8 +124,8 @@
                                     class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                       
-                        <li> <a class="waves-effect waves-dark" href="table-basic.html" aria-expanded="false"><i
-                                    class="fa fa-pencil"></i><span class="hide-menu">Kehadiran Manual</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{url('scan')}}" aria-expanded="false"><i
+                                    class="fa fa-pencil"></i><span class="hide-menu">Scan Kehadiran</span></a>
                         </li>
                         <li> <a class="waves-effect waves-dark" href="icon-fontawesome.html" aria-expanded="false"><i
                                     class="fa fa-smile-o"></i><span class="hide-menu">Icons</span></a>

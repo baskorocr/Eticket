@@ -37,7 +37,7 @@
       <div class="row gx-2">
         <div class="col-lg-12 d-flex justify-content-center justify-item-center">
             <div class="col-2 d-flex justify-content-center justify-item-center">               
-                <a href="#register" class="btn btns me-2 ">Registrasi</a>
+                <a href="#register" class="btn btns me-2 ">Konfirmasi!</a>
                 
             </div>
             
@@ -84,7 +84,7 @@
             </div>
            </div>   
         @endif
-            <h2>Registrasi FamGath</h2>
+            <h2 class="ps-2">Form Konfirmasi Family Gathering 2024</h2>
           </div>
         </div>
           <div class="contact-us-content">

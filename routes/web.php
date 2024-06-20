@@ -26,6 +26,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::post('/postScanPresensi', [App\Http\Controllers\Scan::class, 'postScanPresensi'])->name('postScanPresensi');
-
+    Route::post('/manualPresensi', [App\Http\Controllers\Scan::class, 'manualPresensi'])->name('manualPresensi');
+    Route::get('/verif/{id}', [App\Http\Controllers\Scan::class, 'verif'])->name('verif');
+     Route::get('/scan', [App\Http\Controllers\Scan::class, 'scan'])->name('Scan');
 
 });

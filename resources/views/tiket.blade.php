@@ -49,26 +49,13 @@
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">{{ $data[0]->namaKaryawan }}</div>
                 </div>
+               
                 <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Spouse</div>
+                <div class="col-2 cek ">Total Keluarga</div>
                 <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->Spouse }}</div>
+                <div class="col-6 cek">{{ $data[0]->totalKeluarga }}</div>
                 </div>
-                <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Children</div>
-                <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->Children }}</div>
-                </div>
-                <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Tambahan Spouse</div>
-                <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->TambahanSpouse }}</div>
-                </div>
-                <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Tambahan Children</div>
-                <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->TambahanChildren }}</div>
-                </div>
+              
                 <div class="row justify-content-center justify-items-center mt-2">
                 <div class="col-2 cek ">Transportasi</div>
                 <div class="col-1 cek ms-5">:</div>
@@ -86,11 +73,7 @@
                   
                 @endif</div>
                 </div>
-                <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Ukuran Baju</div>
-                <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->Baju }}</div>
-                </div>
+             
                 
                 
               

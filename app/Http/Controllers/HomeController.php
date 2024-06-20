@@ -28,7 +28,12 @@ class HomeController extends Controller
             ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
             ->where('registrasis.hadir', 1)
             ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan')
-            ->get();
-        return view('home', ['data'=> $registrasis]);
+            ->paginate(10);
+        $belumHadir = DB::table('registrasis')
+            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->where('registrasis.hadir', 0)
+            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan')
+            ->paginate(10);
+        return view('home', ['data'=> $registrasis, 'data2' => $belumHadir]);
     }
 }

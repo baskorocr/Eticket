@@ -5,20 +5,21 @@ import axios from 'axios';
 document.addEventListener("DOMContentLoaded", function () {
     function onScanSuccess(decodedText, decodedResult) {
         console.log(`Code matched = ${decodedText}`, decodedResult);
-      
-        const data = {
-            id: decodedText
-        };
+        window.location.href = `https://cgs.dharmap.com/etiket/verif/${decodedText}`;
         
-         axios.post('/etiket/postScanPresensi', data)
-            .then(function (response) {
-                console.log('Server response:', response.data);
-                alert('Scan data successfully submitted to the server!');
-            })
-            .catch(function (error) {
-                console.error('Error submitting scan data:', error);
-                alert('Failed to submit scan data to the server.');
-            });
+        // const data = {
+        //     id: decodedText
+        // };
+        
+        //  axios.post('/etiket/postScanPresensi', data)
+        //     .then(function (response) {
+        //         console.log('Server response:', response.data);
+        //         alert('Scan data successfully submitted to the server!');
+        //     })
+        //     .catch(function (error) {
+        //         console.error('Error submitting scan data:', error);
+        //         alert('Failed to submit scan data to the server.');
+        //     });
         // Handle the scanned code here, e.g., submit the data to the server
     }
 

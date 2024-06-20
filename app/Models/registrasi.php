@@ -14,12 +14,9 @@ class registrasi extends Model
     protected $fillable = [
         'id',
         'NPK',
-        'Nomer',
-        'Bersedia',
-        'TambahanSpouse',
-        'TambahanChildren',
+        'totalKeluarga',
         'Transportasi',
         'titikJemput',
-        'Baju'
+
     ];
 }
