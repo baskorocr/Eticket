@@ -19,7 +19,7 @@
           <div class="contact-us-content" id="register">
             <div class="pt-1 pb-5 justify-content-center text-center">
                 <h2 class="cek">Konfirmasi</h2>
-                <p class="cek mt-3 notif text-justify">Total Anak Istri/Suami dihitung dari jumlah anak dan Istri/Suami yang digabung. Jika status single isi dengan 0.</p>
+                <p class="cek mt-3 notif text-justify">Total Anak Istri/Suami adalah total jumlah anak dan Istri/Suami yang digabung. Jika status single isi dengan 0.</p>
              
             </div>
            
@@ -36,7 +36,7 @@
  
                
 <div class="row justify-content-center justify-items-center mt-2" id="tambah">
-    <div class="col-3 pt-3 cek">Total anak dan Istri</div>
+    <div class="col-3 pt-3 cek">Total anak dan (Istri/Suami)</div>
     <div class="col-1 pt-3 cek ms-5">:</div>
     <div class="col-6 cek"><input class="" type="wa" name="totalKeluarga" id="spouse" placeholder="" required></div>
     
@@ -60,7 +60,7 @@
     <div class="col-1 pt-3 cek ms-5">:</div>
     <div class="col-6 cek">
         <select class="form-select mt-2" aria-label="Default select example" name="jemputSelect" id="jemputSelect">
-            <option selected>Select an option</option>
+          <option selected>Select an option</option>
             <option value="cikarang">Cikarang</option>
             <option value="serang">Serang</option>
             <option value="balaraja">Balaraja</option>
@@ -92,7 +92,7 @@
                 
                 <div class="col-lg-12 text-center mt-5">
                   <fieldset>
-                     <button type="submit" class="btn btL me-2 ">Registrasi</button>
+                     <button type="submit" class="btn btL me-2 ">Konfirmasi</button>
                   </fieldset>
                 </div>
               </form>

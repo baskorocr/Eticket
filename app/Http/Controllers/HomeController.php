@@ -27,13 +27,18 @@ class HomeController extends Controller
         $registrasis = DB::table('registrasis')
             ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
             ->where('registrasis.hadir', 1)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan')
+            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
             ->paginate(10);
         $belumHadir = DB::table('registrasis')
             ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
             ->where('registrasis.hadir', 0)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan')
+            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
             ->paginate(10);
-        return view('home', ['data'=> $registrasis, 'data2' => $belumHadir]);
+        
+     $totalKaryawan = DB::table('karyawan')->count();
+   
+     $totalKeluargas = DB::table('registrasis')->sum('totalKeluarga');
+     $total = $totalKaryawan+$totalKeluargas;
+        return view('home', ['data'=> $registrasis, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas]);
     }
 }

@@ -32,7 +32,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Table Presensi Kehadiran ({{count($data)}} Hadir)</h4>
+                    <h4 class="card-title">Tabel Jumlah Peserta hadir : {{count($data)}} </h4>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -42,6 +42,8 @@
                                     <th>NPK</th>
                                     <th>Name</th>
                                     <th>Hadir</th>
+                                    <th>Total Keluarga</th>
+                                    <th>total anak dan istri by SunFish</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +54,8 @@
                                     <td>{{ $registrasi->NPK }}</td>
                                     <td>{{ $registrasi->karyawan }}</td>
                                     <td>{{ $registrasi->hadir }}</td>
+                                    <td>{{ $registrasi->totalKeluarga }}</td>
+                                     <td>{{ $registrasi->BaseData }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -73,7 +77,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Table Presensi Kehadiran ({{count($data2)}}  Belum Hadir)</h4>
+                    <h4 class="card-title">Tabel Jumlah Peserta Belum hadir : {{count($data2)}} </h4>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -83,6 +87,8 @@
                                     <th>NPK</th>
                                     <th>Name</th>
                                     <th>Hadir</th>
+                                    <th>Total Keluarga</th>
+                                    <th>total anak dan istri by SunFish</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,6 +99,8 @@
                                     <td>{{ $belum->NPK }}</td>
                                     <td>{{ $belum->karyawan }}</td>
                                     <td>{{ $belum->hadir }}</td>
+                                    <td>{{ $belum->totalKeluarga }}</td>
+                                     <td>{{ $belum->BaseData }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -116,19 +124,38 @@
                 <div class="card-body">
                     <div class="d-flex mb-4 no-block">
                         <h5 class="card-title mb-0 align-self-center">Presensi Presentase</h5>
-                        <div class="ms-auto">
-                            <select class="form-select b-0">
-                                <option selected="">Today</option>
-                                <option value="1">Tomorrow</option>
-                            </select>
-                        </div>
+                        
                     </div>
                     <div id="visitor" style="height:260px; width:100%;"></div>
                     <ul class="list-inline mt-4 text-center font-12">
-                        <li><i class="fa fa-circle text-purple"></i> Tablet</li>
-                        <li><i class="fa fa-circle text-success"></i> Desktops</li>
-                        <li><i class="fa fa-circle text-info"></i> Mobile</li>
+                       
+                        <li><i class="fa fa-circle text-success"></i> Hadir</li>
+                        <li><i class="fa fa-circle text-info"></i> Belum Hadir</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex mb-4 justify-content-center">
+                        <h5 class="card-title mb-0 align-self-center">Counting Jumlah Peserta</h5>
+                      
+                       
+                    </div>
+                    <div class="d-flex justify-content-center" style="font-size:50px; padding-top:77px; padding-bottom:77px;"> {{$total}}</div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">Total Karyawan</div>
+                            <div class="text-center mt-5">{{$totalKaryawan}}</div>
+                        </div>
+                        <div class="col">
+                            <div class="text-center">Total Keluarga Karyawan</div>
+                            <div class="text-center mt-4">{{$totalKeluarga}}</div>
+                        </div>
+                    </div>
+                    
+                      
                 </div>
             </div>
         </div>
@@ -137,4 +164,44 @@
     <!-- End Additional Content -->
     <!-- ============================================================== -->
 </div>
+
+
+<!-- Ensure jQuery and C3.js are loaded -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    "use strict";
+    var chart = c3.generate({
+        bindto: '#visitor',
+        data: {
+            columns: [
+                
+                ['Belum Hadir', {{count($data2)}}],
+                ['Hadir', {{count($data)}}],
+              
+            ],
+            type: 'donut',
+            onclick: function(d, i) { console.log("onclick", d, i); },
+            onmouseover: function(d, i) { console.log("onmouseover", d, i); },
+            onmouseout: function(d, i) { console.log("onmouseout", d, i); }
+        },
+        donut: {
+            label: {
+                show: false
+            },
+            title: "Presentase",
+            width: 20,
+        },
+        legend: {
+            hide: true
+        },
+        color: {
+            pattern: ['#eceff1', '#24d2b5']
+        }
+    });
+});
+</script>
 @endsection

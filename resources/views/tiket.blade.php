@@ -51,13 +51,14 @@
                 </div>
                
                 <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Total Keluarga</div>
+                <div class="col-2 cek ">Total Peserta</div>
                 <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->totalKeluarga }}</div>
+                
+                <div class="col-6 cek">{{ $data[0]->totalKeluarga+1 }}</div>
                 </div>
               
                 <div class="row justify-content-center justify-items-center mt-2">
-                <div class="col-2 cek ">Transportasi</div>
+                <div class="col-2 cek ">Kendaraan</div>
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">{{ $data[0]->Transportasi }}</div>
                 </div>

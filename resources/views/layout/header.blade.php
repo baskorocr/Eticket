@@ -14,8 +14,8 @@
                     <!-- ***** Serach Start ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                      <li class="scroll-to-section"><a href="#contact">Update Status</a></li>
+                      <li class="scroll-to-section"><a href="{{url('/')}}" class="active">Home</a></li>
+                     
                       <li class="scroll-to-section"><a href="{{ url('/cekTiket') }}">Cek Tiket</a></li>
                   </ul>   
                     <a class='menu-trigger'>

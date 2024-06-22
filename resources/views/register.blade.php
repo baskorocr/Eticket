@@ -39,11 +39,7 @@
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">{{ $data[0]->Divisi }}</div>
                 </div>
-                <div class="row justify-content-center justify-items-center">
-                <div class="col-2 cek">Status</div>
-                <div class="col-1 cek ms-5">:</div>
-                <div class="col-6 cek">{{ $data[0]->Status }}</div>
-                </div>
+
                 <div class="row justify-content-center justify-items-center">
                 <div class="col-2 cek">Spouse</div>
                 <div class="col-1 cek ms-5">:</div>

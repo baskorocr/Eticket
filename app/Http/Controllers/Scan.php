@@ -48,7 +48,7 @@ class Scan extends Controller
     public function verif($id, Request $request){
 
 
-        $regist = DB::table('registrasis')->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')->select('registrasis.*','karyawan.namaKaryawan')->where('id', $id)->get();
+        $regist = DB::table('registrasis')->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')->select('registrasis.*','karyawan.namaKaryawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))->where('id', $id)->get();
       
     
         if($regist[0]->hadir == 0){

@@ -57,6 +57,13 @@
                                         </div>
                                     </div>
                                      <div class="form-group">
+                                        <label class="col-md-12">Total Anggota Keluarga (Anak/Istri/Suami) by Sunfish</label>
+                                        <div class="col-md-12">
+                                            <input type="text" 
+                                                class="form-control form-control-line" readonly value="{{$data[0]->BaseData}}" name="totalKeluarga">
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
                                         <label class="col-md-12">Total Anggota Keluarga (Anak/Istri/Suami)</label>
                                         <div class="col-md-12">
                                             <input type="text" 
@@ -66,7 +73,7 @@
                                 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-success">Update Profile</button>
+                                            <button type="submit" class="btn btn-success">Update data dan kehadiran</button>
                                         </div>
                                     </div>
                                 </form>
