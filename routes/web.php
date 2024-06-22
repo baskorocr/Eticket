@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
+Auth::routes(['register' => false]);
 Route::get('/registrasi', [App\Http\Controllers\Karyawan::class, 'search'])->name('search');
 Route::get('/konfirmasi/{id}', [App\Http\Controllers\Karyawan::class, 'konfirmasi'])->name('konfirmasi');
 Route::post('/konfirmasiPost', [App\Http\Controllers\Karyawan::class, 'konfirmasiPost'])->name('konfirmasiPost');
