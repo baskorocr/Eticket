@@ -67,7 +67,7 @@
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">
                   
-                  @if($data[0]->titikJemput == "Select an option")
+                  @if($data[0]->titikJemput == NULL)
                   tidak ada titik jemput
                   @else 
                   {{ $data[0]->titikJemput }}

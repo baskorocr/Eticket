@@ -60,7 +60,7 @@
     <div class="col-1 pt-3 cek ms-5">:</div>
     <div class="col-6 cek">
         <select class="form-select mt-2" aria-label="Default select example" name="jemputSelect" id="jemputSelect">
-          <option selected>Select an option</option>
+     
             <option value="cikarang">Cikarang</option>
             <option value="serang">Serang</option>
             <option value="balaraja">Balaraja</option>

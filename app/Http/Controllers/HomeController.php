@@ -34,11 +34,24 @@ class HomeController extends Controller
             ->where('registrasis.hadir', 0)
             ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
             ->paginate(10);
+
+      
         
      $totalKaryawan = DB::table('karyawan')->count();
    
      $totalKeluargas = DB::table('registrasis')->sum('totalKeluarga');
      $total = $totalKaryawan+$totalKeluargas;
-        return view('home', ['data'=> $registrasis, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas]);
+        return view('home', ['data'=> $registrasis, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas, ]);
+    }
+
+    
+    public function overData(){
+          $dataOver = DB::table('registrasis as r')
+        ->join('karyawan as k', 'r.NPK', '=', 'k.NPK')
+        ->select('r.*', DB::raw('(k.spouse + k.children) as BaseData'), 'k.namaKaryawan')
+        ->whereRaw('r.totalKeluarga > (k.spouse + k.children)')
+        ->paginate(10);
+
+        return view('overData', ['dataOver' => $dataOver]);
     }
 }

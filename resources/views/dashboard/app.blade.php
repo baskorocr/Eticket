@@ -127,8 +127,8 @@
                         <li> <a class="waves-effect waves-dark" href="{{url('scan')}}" aria-expanded="false"><i
                                     class="fa fa-pencil"></i><span class="hide-menu">Scan Kehadiran</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="icon-fontawesome.html" aria-expanded="false"><i
-                                    class="fa fa-smile-o"></i><span class="hide-menu">Icons</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{url('overData')}}" aria-expanded="false"><i
+                                    class="fa fa-info"></i><span class="hide-menu">Data Over</span></a>
                         </li>
                         <li> <a class="waves-effect waves-dark" href="map-google.html" aria-expanded="false"><i
                                     class="fa fa-globe"></i><span class="hide-menu">Map</span></a>

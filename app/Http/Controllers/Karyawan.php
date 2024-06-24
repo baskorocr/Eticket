@@ -64,14 +64,31 @@ class Karyawan extends Controller
         try {
 
             if($request->select != 'tidak'){
-                registrasi::create([
-                'id' => $uuid,
-                'NPK' => $request->npk,
-                'totalKeluarga'=> $request->totalKeluarga,
-                'Transportasi' => $request->additionalSelect,
-                'titikJemput' => $request->jemputSelect,
+                if($request->additionalSelect == "bus"){
+                    registrasi::create([
+                        'id' => $uuid,
+                        'NPK' => $request->npk,
+                        'totalKeluarga'=> $request->totalKeluarga,
+                        'Transportasi' => $request->additionalSelect,
+                        'titikJemput' => $request->jemputSelect,
 
-            ]);
+                    ]);
+                    
+                }
+                else{
+                    registrasi::create([
+                        'id' => $uuid,
+                        'NPK' => $request->npk,
+                        'totalKeluarga'=> $request->totalKeluarga,
+                        'Transportasi' => $request->additionalSelect,
+                        'titikJemput' => null,
+
+                    ]);
+
+
+                }
+                
+                
             }
             
           
