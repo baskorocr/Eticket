@@ -12,7 +12,7 @@
             
           <div class="col-lg-12 text-center">
           <div class="section-heading mb-5">
-            <h2 class="cek">Registrasi FamGath</h2>
+            <h2 class="cek">Konfimasi FamGath</h2>
           </div>
         </div>
           <div class="contact-us-content" id="register">
@@ -41,12 +41,12 @@
                 </div>
 
                 <div class="row justify-content-center justify-items-center">
-                <div class="col-2 cek">Spouse</div>
+                <div class="col-2 cek">Suami/Istri</div>
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">{{ $data[0]->Spouse }}</div>
                 </div>
                 <div class="row justify-content-center justify-items-center">
-                <div class="col-2 cek">Children</div>
+                <div class="col-2 cek">Anak</div>
                 <div class="col-1 cek ms-5">:</div>
                 <div class="col-6 cek">{{ $data[0]->Children }}</div>
                 </div>

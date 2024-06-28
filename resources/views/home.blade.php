@@ -28,46 +28,49 @@
     <!-- Presence Table -->
     <!-- ============================================================== -->
     <div class="row">
-        <!-- column -->
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Tabel Jumlah Peserta hadir : {{count($data)}} </h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Id</th>
-                                    <th>NPK</th>
-                                    <th>Name</th>
-                                    <th>Hadir</th>
-                                    <th>Total Keluarga</th>
-                                    <th>total anak dan istri by SunFish</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $index => $registrasi)
-                                <tr>
-                                    <td>{{ $data->firstItem() + $index }}</td>
-                                    <td>{{ $registrasi->id }}</td>
-                                    <td>{{ $registrasi->NPK }}</td>
-                                    <td>{{ $registrasi->karyawan }}</td>
-                                    <td>{{ $registrasi->hadir }}</td>
-                                    <td>{{ $registrasi->totalKeluarga }}</td>
-                                     <td>{{ $registrasi->BaseData }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            {!! $data->links() !!}
-                        </div>
+    <!-- column -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabel Jumlah Peserta hadir : {{$countHadir}}</h4>
+                <!-- Search Input -->
+               
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Id</th>
+                                <th>NPK</th>
+                                <th>Name</th>
+                                <th>Hadir</th>
+                                <th>Total Keluarga</th>
+                                <th>Total anak dan istri by SunFish</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            @foreach ($data as $index => $registrasi)
+                            <tr>
+                                <td>{{ $data->firstItem() + $index }}</td>
+                                <td>{{ $registrasi->id }}</td>
+                                <td>{{ $registrasi->NPK }}</td>
+                                <td>{{ $registrasi->karyawan }}</td>
+                                <td>{{ $registrasi->hadir }}</td>
+                                <td>{{ $registrasi->totalKeluarga }}</td>
+                                <td>{{ $registrasi->BaseData }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        {!! $data->links() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- ============================================================== -->
     <!-- Absence Table -->
@@ -77,7 +80,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Tabel Jumlah Peserta Belum hadir : {{count($data2)}} </h4>
+                    <h4 class="card-title">Tabel Jumlah Peserta Belum hadir : {{$countBelumHadir}} </h4>
+                     <!-- Search Input -->
+                
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -94,7 +99,7 @@
                             <tbody>
                                 @foreach ($data2 as $index => $belum)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $data2->firstItem() +$index  }}</td>
                                     <td>{{ $belum->id }}</td>
                                     <td>{{ $belum->NPK }}</td>
                                     <td>{{ $belum->karyawan }}</td>
@@ -106,7 +111,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            {!! $data->links() !!}
+                            {!! $data2->links() !!}
                         </div>
                     </div>
                 </div>
@@ -130,11 +135,44 @@
                     <ul class="list-inline mt-4 text-center font-12">
                        
                         <li><i class="fa fa-circle text-success"></i> Hadir</li>
-                        <li><i class="fa fa-circle text-info"></i> Belum Hadir</li>
+                        <li><i class="fa fa-circle " style="color:#FF7F3E"></i> Belum Hadir</li>
                     </ul>
                 </div>
             </div>
         </div>
+
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex mb-4 justify-content-center">
+                        <h5 class="card-title mb-0 align-self-center">Data Sistem Konfirmasi VS Data Sunfish</h5>
+                      
+                       
+                    </div>
+                     <div class="row">
+                        <div class="col">
+                            <div class="text-center">Total Data Konfirmasi</div>
+                            <div class="text-center mt-5">{{$totalKaryawan}}</div>
+                        </div>
+                        <div class="col">
+                            <div class="text-center">Total Data Karyawan Di Sunfish</div>
+                            <div class="text-center mt-4">{{$karyawan}}</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:43px; "> Aktual Sistem :</div>
+                    <div class="d-flex justify-content-center" style="font-size:70px; ; padding-bottom:20px;"> {{intval(($totalKaryawan/$karyawan)*100)}}%</div>
+                    <div class="d-flex justify-content-center mb-2"> Dari total keseluruhan data di sunfish</div>
+                   
+                    
+                      
+                </div>
+            </div>
+        </div>
+        
+        
+        
+      
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -143,22 +181,25 @@
                       
                        
                     </div>
-                    <div class="d-flex justify-content-center" style="font-size:50px; padding-top:77px; padding-bottom:77px;"> {{$total}}</div>
                     <div class="row">
                         <div class="col">
-                            <div class="text-center">Total Karyawan</div>
-                            <div class="text-center mt-5">{{$totalKaryawan}}</div>
+                            <div class="text-center">Total Konfirmasi Karyawan</div>
+                            <div class="text-center mt-4">{{$totalKaryawan}}</div>
                         </div>
                         <div class="col">
-                            <div class="text-center">Total Keluarga Karyawan</div>
+                            <div class="text-center">Total Anggota keluarga Karyawan</div>
                             <div class="text-center mt-4">{{$totalKeluarga}}</div>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:50px; "> Total:</div>
+                    <div class="d-flex justify-content-center" style="font-size:67px; "> {{$total}}</div>
+                     <div class="d-flex justify-content-center mb-3" style=" padding-top:15px;">Peserta</div>
                     
                       
                 </div>
             </div>
         </div>
+       
     </div>
     <!-- ============================================================== -->
     <!-- End Additional Content -->
@@ -171,7 +212,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js"></script>
 
+
+
+
+
+
+
 <script>
+
 $(document).ready(function(){
     "use strict";
     var chart = c3.generate({
@@ -179,8 +227,8 @@ $(document).ready(function(){
         data: {
             columns: [
                 
-                ['Belum Hadir', {{count($data2)}}],
-                ['Hadir', {{count($data)}}],
+                ['Belum Hadir', {{$countBelumHadir}}],
+                ['Hadir', {{$countHadir}}],
               
             ],
             type: 'donut',
@@ -199,9 +247,15 @@ $(document).ready(function(){
             hide: true
         },
         color: {
-            pattern: ['#eceff1', '#24d2b5']
+            pattern: ['#FF7F3E', '#24d2b5']
         }
+
+        
     });
+   
+
+   
+
 });
 </script>
 @endsection

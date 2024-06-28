@@ -10,8 +10,8 @@
         <div class="col-md-5 align-self-center">
             <h3 class="text-themecolor">Dashboard</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">Data Over</li>
             </ol>
         </div>
     </div>
@@ -32,8 +32,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">OverData compare by data Sunfish </h4>
+                    <h4 class="card-title">OverData compare by data Sunfish ({{$countData}} Orang) </h4>
                     <div class="table-responsive">
+                        
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -77,6 +78,7 @@
     <!-- End Additional Content -->
     <!-- ============================================================== -->
 </div>
+
 
 
 <!-- Ensure jQuery and C3.js are loaded -->

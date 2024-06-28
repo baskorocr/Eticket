@@ -18,7 +18,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('../assets/images/favicon.png') }}">
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href=" {{ asset('/assets/node_modules/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href=" {{ asset('./assets/node_modules/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
@@ -130,11 +133,11 @@
                         <li> <a class="waves-effect waves-dark" href="{{url('overData')}}" aria-expanded="false"><i
                                     class="fa fa-info"></i><span class="hide-menu">Data Over</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="map-google.html" aria-expanded="false"><i
-                                    class="fa fa-globe"></i><span class="hide-menu">Map</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{url('allData')}}" aria-expanded="false"><i
+                                    class="fa fa-check-square-o"></i><span class="hide-menu">Data Konfirmasi </span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false"><i
-                                    class="fa fa-bookmark-o"></i><span class="hide-menu">Blank</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{url('downloadArea')}}" aria-expanded="false"><i
+                                    class="fa fa-file-excel-o"></i><span class="hide-menu">All data Report</span></a>
                         </li>
                        <li>
         <a class="waves-effect waves-dark" href="{{ route('logout') }}" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
