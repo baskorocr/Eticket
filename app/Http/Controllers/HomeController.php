@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Rap2hpoutre\FastExcel\SheetCollection;
+
+
 class HomeController extends Controller
 {
     /**
@@ -155,19 +157,28 @@ public function downloadOverData()
             ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))->where('Transportasi', '=', 'pribadi')
             ->get();
 
+            $sheets = new SheetCollection([
+                'regist' => $registrasis, 
+                'hadir' => $hadir, 
+                'belum hadir ' => $belumHadir,
+                'over' => $dataOver,
+                'kendaraan'=> $kendaraanPribadi
+            ]);
+            return (new FastExcel($sheets))->download('data_export.xlsx');
+
         // Generate CSV content
-        $csvContent = $this->generateCsvContent($registrasis, $hadir, $belumHadir, $dataOver, $kendaraanPribadi);
+        // $csvContent = $this->generateCsvContent($registrasis, $hadir, $belumHadir, $dataOver, $kendaraanPribadi);
 
-        // Set headers for download
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="data_export.csv"',
-        ];
+        // // Set headers for download
+        // $headers = [
+        //     'Content-Type' => 'text/csv',
+        //     'Content-Disposition' => 'attachment; filename="data_export.csv"',
+        // ];
 
-        // Return response with CSV content
-        return response()->streamDownload(function () use ($csvContent) {
-            echo $csvContent;
-        }, 'data_export.csv', $headers);
+        // // Return response with CSV content
+        // return response()->streamDownload(function () use ($csvContent) {
+        //     echo $csvContent;
+        // }, 'data_export.csv', $headers);
     }
 
     private function generateCsvContent($registrasis, $hadir, $belumHadir, $dataOver, $kendaraanPribadi)

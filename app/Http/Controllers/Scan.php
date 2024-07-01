@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class Scan extends Controller
 {
     
@@ -24,11 +24,13 @@ class Scan extends Controller
 
     public function manualPresensi(Request $request){
 
+        date_default_timezone_set('Asia/Jakarta');
         $updated = DB::table('registrasis')
             ->where('NPK', $request->npk)
             ->update([
                 'hadir' => 1,
-                'totalKeluarga' => $request->totalKeluarga
+                'totalKeluarga' => $request->totalKeluarga,
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             
             ]);
 
