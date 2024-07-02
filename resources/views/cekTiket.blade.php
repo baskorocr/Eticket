@@ -16,7 +16,17 @@
           </div>
         </div>
           <div class="contact-us-content" id="register">
-            
+             @if (session('success'))
+                        <div class="alert alert-success text-center">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if (session('error'))
+                        <div class="alert alert-danger text-center">
+                            {{ session('error') }}
+                        </div>
+                        @endif
            
             <form id="contact-form" class="mt-5" action="{{ url('cekTiketPost') }}" method="post">
               @csrf

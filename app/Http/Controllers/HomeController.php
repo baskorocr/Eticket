@@ -52,7 +52,30 @@ class HomeController extends Controller
      $totalKeluargas = DB::table('registrasis')->sum('totalKeluarga');
 
      $total = $totalKaryawan+$totalKeluargas;
-        return view('home', ['data'=> $registrasis,'karyawan'=>$karyawan, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas, 'countHadir'=>$countHadir, 'countBelumHadir'=>$countBelumHadir ]);
+
+     $registrationCounts = DB::table('karyawan')
+        ->leftJoin('registrasis', 'karyawan.NPK', '=', 'registrasis.NPK')
+        ->select(
+            'karyawan.divisi',
+            DB::raw('COUNT(registrasis.id) as count_registrations'),
+            DB::raw('SUM(registrasis.totalKeluarga) as total_family_members')
+        )
+        ->groupBy('karyawan.divisi')
+        ->get();
+
+    // Calculate the total registrations and total family members
+    $totalRegistrations = $registrationCounts->sum('count_registrations');
+    $totalFamilyMembers = $registrationCounts->sum('total_family_members');
+
+    // Add percentage to each division based on total employees
+    $divisiCounts = $registrationCounts->map(function ($item) use ($karyawan) {
+        $item->percentage_total_employees = $karyawan > 0 ? ($item->count_registrations / $karyawan) * 100 : 0;
+        return $item;
+    });
+
+ 
+     
+        return view('home', ['data'=> $registrasis,'karyawan'=>$karyawan, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas, 'countHadir'=>$countHadir, 'countBelumHadir'=>$countBelumHadir,'diviCount' => $divisiCounts, ]);
     }
 
     

@@ -110,6 +110,7 @@ class Karyawan extends Controller
     {
         $data = DB::table('registrasis')->join('karyawan', 'registrasis.NPK', '=', 'karyawan.NPK')->select("registrasis.NPK", "registrasis.id", "registrasis.Transportasi", "registrasis.totalKeluarga", "registrasis.titikJemput", "karyawan.namaKaryawan", )->where('registrasis.NPK','=',$request->npk)->get();
         $count = count($data);
+    
 
         if($count != 0){
 

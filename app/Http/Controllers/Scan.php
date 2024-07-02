@@ -68,4 +68,45 @@ class Scan extends Controller
     public function scan(){
         return view('manual');
     }
+
+     public function edit($id)
+    {
+        
+        $data = DB::table('registrasis')->where('id', $id)->first();
+        
+        return view('updateData', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+       
+    
+      
+        // Validate the request
+         $titikJemput = $request->input('additionalSelect') === 'pribadi' ? null : $request->input('jemputSelect');
+
+      
+         
+    // Update the record
+    $cek = DB::table('registrasis')
+        ->where('id', $id)
+        ->update([
+            'NPK' => $request->input('NPK'),
+            'totalKeluarga' => $request->input('totalKeluarga'),
+            'Transportasi' => $request->input('additionalSelect'),
+            'titikJemput' => $titikJemput,
+            // Add other fields as needed
+        ]);
+       
+
+        if ($cek) {
+        // Flash a success message
+        $request->session()->flash('success', 'Data berhasil diperbarui.');
+    } else {
+        // Flash an error message if update fails
+        $request->session()->flash('error', 'Gagal memperbarui data.');
+    }
+
+    return redirect()->route('cekTiket');
+    }
 }

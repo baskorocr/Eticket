@@ -118,6 +118,43 @@
             </div>
         </div>
     </div>
+    <div class="row">
+    <!-- column for divisiCounts -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Division Registration Counts and Percentages</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Division</th>
+                                <th>Count Registrations</th>
+                                <th>Percentage System Vs Sunfish</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($diviCount as $division)
+                            <tr>
+                                <td>{{ $division->divisi }}</td>
+                                <td>{{ $division->count_registrations }}</td>
+                                <td>{{ number_format($division->percentage_total_employees, 2) }}%</td>
+                            </tr>
+                            @endforeach
+                            <tr>
+                               <tr>
+                                <td><strong>Total</strong></td>
+                                <td><strong>{{ $totalKaryawan }}</strong></td>
+                                <td><strong>{{ number_format($diviCount->sum('percentage_total_employees'), 2) }}%</strong></td>
+                            </tr>
+                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
     <!-- ============================================================== -->
     <!-- Additional Content -->

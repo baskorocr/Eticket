@@ -23,6 +23,21 @@
             </div>
            </div>
            @else
+
+            @if (session('success'))
+           <div class="d-flex justify-content-center align-items-center">
+             <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+           </div>
+           @elseif (session('error'))
+           <div class="d-flex justify-content-center align-items-center">
+             <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+           </div>
+           @endif
+
             <div class="row mb-5">
                 <div class="col d-flex justify-content-center align-items-center">
                     <div style="background-color: white;">
@@ -82,8 +97,19 @@
             </div>
            @endif
           </div>
+          
         </div>
       </div>
+      @if(!empty($data) && $data[0] != NULL)
+      <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mt-3">
+                    <a href="{{ route('edit', $data[0]->id) }}" class="btn btL">Update</a>
+                </div>
+
+                 
+      </div>
+      @endif
+
     </div>
   </div>
 
