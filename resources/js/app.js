@@ -3,28 +3,20 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 import axios from 'axios';
 
 document.addEventListener("DOMContentLoaded", function () {
+    let hasScanned = false;
+
     function onScanSuccess(decodedText, decodedResult) {
+        if (hasScanned) return;
+        hasScanned = true;
+
         console.log(`Code matched = ${decodedText}`, decodedResult);
-        window.location.href = `https://cgs.dharmap.com/etiket/verif/${decodedText}`;
-        
-        // const data = {
-        //     id: decodedText
-        // };
-        
-        //  axios.post('/etiket/postScanPresensi', data)
-        //     .then(function (response) {
-        //         console.log('Server response:', response.data);
-        //         alert('Scan data successfully submitted to the server!');
-        //     })
-        //     .catch(function (error) {
-        //         console.error('Error submitting scan data:', error);
-        //         alert('Failed to submit scan data to the server.');
-        //     });
-        // Handle the scanned code here, e.g., submit the data to the server
+
+        setTimeout(() => {
+            window.location.href = `https://cgs.dharmap.com/kidp/verif/${decodedText}`;
+        }, 2000); // delay 1 detik (1000 ms), bisa disesuaikan
     }
 
     function onScanFailure(error) {
-        // Handle scan failure, usually better to ignore and keep scanning
         console.warn(`Code scan error = ${error}`);
     }
 
@@ -35,3 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 });
+

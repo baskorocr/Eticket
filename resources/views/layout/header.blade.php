@@ -6,7 +6,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="{{ url('/') }}" class="logo">
-                        <h1>ETicket</h1>
+                        <h1>KIDP</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Serach Start ***** -->
@@ -14,9 +14,9 @@
                     <!-- ***** Serach Start ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li class="scroll-to-section"><a href="{{url('/')}}" class="active">Home</a></li>
+                      <li class="scroll-to-section"><a href="{{url('/login')}}" class="active">Login</a></li>
                      
-                      <li class="scroll-to-section"><a href="{{ url('/cekTiket') }}">Cek Tiket</a></li>
+
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>

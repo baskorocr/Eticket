@@ -15,12 +15,12 @@ class CreateRegistrasisTable extends Migration
             $table->string('Bersedia', 10);
             $table->integer('Tambahan');
             $table->timestamps();
-            $table->string('Barcode')->nullable();
+            $table->integer('hadir')->default(0);
 
             // Define foreign key constraint
             $table->foreign('NPK')
                 ->references('NPK')
-                ->on('karyawan')
+                ->on('karyawans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

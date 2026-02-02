@@ -44,8 +44,7 @@
                                 <th>NPK</th>
                                 <th>Name</th>
                                 <th>Hadir</th>
-                                <th>Total Keluarga</th>
-                                <th>Total anak dan istri by SunFish</th>
+                              
                             </tr>
                         </thead>
                         <tbody id="table-body">
@@ -55,9 +54,14 @@
                                 <td>{{ $registrasi->id }}</td>
                                 <td>{{ $registrasi->NPK }}</td>
                                 <td>{{ $registrasi->karyawan }}</td>
-                                <td>{{ $registrasi->hadir }}</td>
-                                <td>{{ $registrasi->totalKeluarga }}</td>
-                                <td>{{ $registrasi->BaseData }}</td>
+                                <td>
+                                    @if($registrasi->hadir == 1)
+                                        hadir
+                                  
+                                    @endif
+                                </td>
+
+                              
                             </tr>
                             @endforeach
                         </tbody>
@@ -92,8 +96,7 @@
                                     <th>NPK</th>
                                     <th>Name</th>
                                     <th>Hadir</th>
-                                    <th>Total Keluarga</th>
-                                    <th>total anak dan istri by SunFish</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,9 +106,12 @@
                                     <td>{{ $belum->id }}</td>
                                     <td>{{ $belum->NPK }}</td>
                                     <td>{{ $belum->karyawan }}</td>
-                                    <td>{{ $belum->hadir }}</td>
-                                    <td>{{ $belum->totalKeluarga }}</td>
-                                     <td>{{ $belum->BaseData }}</td>
+                                    <td>
+                                        @if($belum->hadir == 0)
+                                            belum hadir
+                                        @endif
+                                    </td>
+                                   
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -118,8 +124,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
-    <!-- column for divisiCounts -->
+
+     <!-- column for divisiCounts -->
+    <!-- <div class="row">
+   
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -154,7 +162,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div> -->
 
     <!-- ============================================================== -->
     <!-- Additional Content -->
@@ -183,23 +191,17 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex mb-4 justify-content-center">
-                        <h5 class="card-title mb-0 align-self-center">Data Sistem Konfirmasi VS Data Sunfish</h5>
+                        <h5 class="card-title mb-0 align-self-center">Persentasi Kehadiran</h5>
                       
                        
                     </div>
-                     <div class="row">
-                        <div class="col">
-                            <div class="text-center">Total Data Konfirmasi</div>
-                            <div class="text-center mt-5">{{$totalKaryawan}}</div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center">Total Data Karyawan Di Sunfish</div>
-                            <div class="text-center mt-4">{{$karyawan}}</div>
-                        </div>
+                    
+                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:5px; "> Aktual Sistem :</div>
+                    <div class="d-flex justify-content-center" style="font-size:70px; ; padding-bottom:20px;"> {{ $totalKaryawan > 0 ? intval(($countHadir / $totalKaryawan) * 100) : 0 }}%
                     </div>
-                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:43px; "> Aktual Sistem :</div>
-                    <div class="d-flex justify-content-center" style="font-size:70px; ; padding-bottom:20px;"> {{intval(($totalKaryawan/$karyawan)*100)}}%</div>
-                    <div class="d-flex justify-content-center mb-2"> Dari total keseluruhan data di sunfish</div>
+                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:5px; ">Jumlah Peserta Acara:</div>
+                    <div class="d-flex justify-content-center" style="font-size:70px; ; padding-bottom:20px;"> {{$totalKaryawan}}</div>
+                  
                    
                     
                       
@@ -210,32 +212,7 @@
         
         
       
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex mb-4 justify-content-center">
-                        <h5 class="card-title mb-0 align-self-center">Counting Jumlah Peserta</h5>
-                      
-                       
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">Total Konfirmasi Karyawan</div>
-                            <div class="text-center mt-4">{{$totalKaryawan}}</div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center">Total Anggota keluarga Karyawan</div>
-                            <div class="text-center mt-4">{{$totalKeluarga}}</div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center" style="font-size:20px; padding-top:50px; "> Total:</div>
-                    <div class="d-flex justify-content-center" style="font-size:67px; "> {{$total}}</div>
-                     <div class="d-flex justify-content-center mb-3" style=" padding-top:15px;">Peserta</div>
-                    
-                      
-                </div>
-            </div>
-        </div>
+        
        
     </div>
     <!-- ============================================================== -->

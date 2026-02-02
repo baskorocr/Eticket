@@ -46,8 +46,7 @@
                                 <th>NPK</th>
                                 <th>Name</th>
                                 <th>Hadir</th>
-                                <th>Total Keluarga</th>
-                                <th>Total anak dan istri by SunFish</th>
+                                
                             </tr>
                         </thead>
                         <tbody id="table-body">
@@ -58,8 +57,7 @@
                                 <td>{{ $registrasi->NPK }}</td>
                                 <td>{{ $registrasi->karyawan }}</td>
                                 <td>@if($registrasi->hadir == 1) hadir @else tidak hadir @endif</td>
-                                <td>{{ $registrasi->totalKeluarga }}</td>
-                                <td>{{ $registrasi->BaseData }}</td>
+                             
                             </tr>
                             @endforeach
                         </tbody>

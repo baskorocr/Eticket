@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\karyawan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,18 @@ Route::get('/', function () {
     //return  view('mt');
 })->name('index');
 Auth::routes(['register' => false]);
-Route::get('/registrasi', [App\Http\Controllers\Karyawan::class, 'search'])->name('search');
+Route::get('/registrasi', [App\Http\Controllers\Karyawan::class, 'search'])->name('search.regist');
 Route::get('/konfirmasi/{id}', [App\Http\Controllers\Karyawan::class, 'konfirmasi'])->name('konfirmasi');
-Route::post('/konfirmasiPost', [App\Http\Controllers\Karyawan::class, 'konfirmasiPost'])->name('konfirmasiPost');
 Route::get('/cekTiket', [App\Http\Controllers\Karyawan::class, 'cekTiket'])->name('cekTiket');
-Route::post('/cekTiketPost', [App\Http\Controllers\Karyawan::class, 'cekTiketPost'])->name('cekTiketPost');
-Route::get('/tiket/{id}/edit', [App\Http\Controllers\Scan::class, 'edit'])->name('edit'); 
-Route::put('/registrations/{id}', [App\Http\Controllers\Scan::class, 'update'])->name('update');
-Auth::routes();
+
+Route::middleware(['web'])->group(function () {
+    Route::post('/cekTiketPost', [App\Http\Controllers\Karyawan::class, 'cekTiketPost'])->name('cekTiketPost');
+    Route::get('/cekTiketPost', [App\Http\Controllers\Karyawan::class, 'balik']);
+    Route::post('/konfirmasiPost', [App\Http\Controllers\Karyawan::class, 'konfirmasiPost'])->name('konfirmasiPost');
+
+});
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -38,7 +43,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/allData', [App\Http\Controllers\HomeController::class, 'allData'])->name('allData');
      Route::get('/downloadData', [App\Http\Controllers\HomeController::class, 'downloadOverData'])->name('downloadData');
      Route::get('/downloadArea', [App\Http\Controllers\HomeController::class, 'downloadArea'])->name('downloadOverData');
-     
+    Route::post('/tiketUpdate', [App\Http\Controllers\Scan::class, 'edit'])->name('tiketUpdate'); 
+    Route::put('/registrations/{id}', [App\Http\Controllers\Scan::class, 'update'])->name('update');
+    Route::get('/updateByAdmin', [App\Http\Controllers\Scan::class, 'updateByAdmin'])->name('updateByAdmin'); 
+    Route::get('/send', [App\Http\Controllers\Karyawan::class, 'send'])->name('send');
+    Route::get('/sendWa', [App\Http\Controllers\Karyawan::class,'sendWa'])->name('sendWa');
+    Route::get('/send-email', [App\Http\Controllers\Karyawan::class, 'sendEmail'])->name('send.email');
     
 
 

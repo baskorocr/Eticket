@@ -29,39 +29,41 @@ class HomeController extends Controller
     public function index()
     {
         $registrasis = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
             ->where('registrasis.hadir', 1)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
-            ->paginate(10);
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan',)
+            ->paginate(200);
 
         $countHadir = $registrasis->total();
+      
 
         $belumHadir = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
             ->where('registrasis.hadir', 0)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
-            ->paginate(10);
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan', )
+            ->paginate(200);
 
-            $countBelumHadir = $belumHadir->total();
+        $countBelumHadir = $belumHadir->total();
 
       
-     $karyawan = DB::table("karyawan")->count();
+     $karyawan = DB::table('karyawans')->count();
 
      $totalKaryawan = DB::table('registrasis')->count();
-   
-     $totalKeluargas = DB::table('registrasis')->sum('totalKeluarga');
+ 
 
-     $total = $totalKaryawan+$totalKeluargas;
+     $total = $totalKaryawan;
 
-     $registrationCounts = DB::table('karyawan')
-        ->leftJoin('registrasis', 'karyawan.NPK', '=', 'registrasis.NPK')
+     $registrationCounts = DB::table('karyawans')
+        ->leftJoin('registrasis', 'karyawans.NPK', '=', 'registrasis.NPK')
         ->select(
-            'karyawan.divisi',
+            'karyawans.divisi',
             DB::raw('COUNT(registrasis.id) as count_registrations'),
-            DB::raw('SUM(registrasis.totalKeluarga) as total_family_members')
+          
         )
-        ->groupBy('karyawan.divisi')
+        ->groupBy('karyawans.divisi')
         ->get();
+
+   
 
     // Calculate the total registrations and total family members
     $totalRegistrations = $registrationCounts->sum('count_registrations');
@@ -75,7 +77,7 @@ class HomeController extends Controller
 
  
      
-        return view('home', ['data'=> $registrasis,'karyawan'=>$karyawan, 'data2' => $belumHadir, 'total'=>$total,'totalKaryawan'=>$totalKaryawan, 'totalKeluarga'=>$totalKeluargas, 'countHadir'=>$countHadir, 'countBelumHadir'=>$countBelumHadir,'diviCount' => $divisiCounts, ]);
+        return view('home', ['data'=> $registrasis, 'total'=>$total,'karyawans'=>$karyawan, 'data2' => $belumHadir, 'totalKaryawan'=>$totalKaryawan, 'countHadir'=>$countHadir, 'countBelumHadir'=>$countBelumHadir,'diviCount' => $divisiCounts, ]);
     }
 
     
@@ -85,8 +87,15 @@ class HomeController extends Controller
     ->select('r.*', DB::raw('(k.spouse + k.children) as BaseData'), 'k.namaKaryawan')
     ->whereRaw('r.totalKeluarga > (k.spouse + k.children)')->paginate(10);
         $countData = $dataOver->total();
+        $totalSum = DB::table('registrasis as r')
+    ->join('karyawan as k', 'r.NPK', '=', 'k.NPK')
+    ->select('r.*', DB::raw('(k.spouse + k.children) as BaseData'), 'k.namaKaryawan')
+    ->whereRaw('r.totalKeluarga > (k.spouse + k.children)')->sum('r.totalKeluarga');
+
+// Menambahkan total sum ke dalam objek hasil paginasi
+    
  
-        return view('overData', ['dataOver' => $dataOver, 'countData'=> $countData]);
+        return view('overData', ['dataOver' => $dataOver, 'countData'=> $countData, 'totalSum'=> $totalSum]);
     }
 
 
@@ -96,7 +105,7 @@ class HomeController extends Controller
     $data = '';
 
     if (!empty($searchTerm)) {
-        $registrasis = DB::table('registrasis') ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+        $registrasis = DB::table('registrasis') ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
                         ->where('registrasis.NPK', 'LIKE', '%'.$searchTerm.'%')
                         ->get(); // Fetching data using get() to retrieve results
 
@@ -113,7 +122,7 @@ class HomeController extends Controller
         }
     }
     else{
-        $registrasis = DB::table('registrasis')->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+        $registrasis = DB::table('registrasis')->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
                         ->paginate(10); // Paginate all results if no search te->paginate(10);
         foreach ($registrasis as $key => $registrasi) {
             $data .= '<tr>'.
@@ -138,8 +147,8 @@ class HomeController extends Controller
 public function allData(){
 
     $registrasis = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan', )
             ->paginate(10);
 
     
@@ -153,39 +162,30 @@ public function downloadOverData()
     // Fetch your data using the DB facade
        // Fetch your data using the DB facade
         $registrasis = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan',)
             ->get();
 
         $hadir = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
             ->where('registrasis.hadir', 1)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan', )
             ->get();
 
         $belumHadir = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
+            ->join('karyawans', 'registrasis.npk', '=', 'karyawans.npk')
             ->where('registrasis.hadir', 0)
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))
+            ->select('registrasis.*', 'karyawans.namaKaryawan as karyawan', )
             ->get();
 
-        $dataOver = DB::table('registrasis as r')
-            ->join('karyawan as k', 'r.NPK', '=', 'k.NPK')
-            ->select('r.*', DB::raw('(k.spouse + k.children) as BaseData'), 'k.namaKaryawan')
-            ->whereRaw('r.totalKeluarga > (k.spouse + k.children)')
-            ->get();
-        
-         $kendaraanPribadi = DB::table('registrasis')
-            ->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')
-            ->select('registrasis.*', 'karyawan.namaKaryawan as karyawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))->where('Transportasi', '=', 'pribadi')
-            ->get();
+       
+     
 
             $sheets = new SheetCollection([
                 'regist' => $registrasis, 
                 'hadir' => $hadir, 
                 'belum hadir ' => $belumHadir,
-                'over' => $dataOver,
-                'kendaraan'=> $kendaraanPribadi
+                
             ]);
             return (new FastExcel($sheets))->download('data_export.xlsx');
 

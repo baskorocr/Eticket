@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class registrasi extends Model
 {
@@ -14,9 +16,13 @@ class registrasi extends Model
     protected $fillable = [
         'id',
         'NPK',
-        'totalKeluarga',
-        'Transportasi',
-        'titikJemput',
+        'sendEmail'
+
 
     ];
+
+        public function karyawan(): BelongsTo
+    {
+        return $this->belongsTo(karyawan::class, 'NPK', 'NPK');
+    }
 }

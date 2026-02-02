@@ -12,17 +12,21 @@
             
           <div class="col-lg-12 text-center">
           <div class="section-heading mb-5 justify-content-center align-items-center">
-            <h2 class="cek ps-2">Cek Tiket</h2>
+            <h2 class="cek ps-2">Cek Pendaftaran mu dibawah</h2>
           </div>
         </div>
           <div class="contact-us-content" id="register">
-             @if (session('success'))
+                        @if (session('success'))
                         <div class="alert alert-success text-center">
                             {{ session('success') }}
                         </div>
-                        @endif
+                        @elseif (session('info'))
+                        <div class="alert alert-warning text-center">
+                            {{ session('info') }}
+                        </div>
+                     
 
-                        @if (session('error'))
+                        @elseif (session('error'))
                         <div class="alert alert-danger text-center">
                             {{ session('error') }}
                         </div>

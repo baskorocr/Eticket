@@ -126,12 +126,18 @@
                         <li> <a class="waves-effect waves-dark" href="{{ url('home') }}" aria-expanded="false"><i
                                     class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
+                        <li> <a class="waves-effect waves-dark" href="{{ route('send') }}" aria-expanded="false"><i
+                                    class="fa fa-tachometer"></i><span class="hide-menu">Kirim Undangan</span></a>
+                        </li>
                       
                         <li> <a class="waves-effect waves-dark" href="{{url('scan')}}" aria-expanded="false"><i
-                                    class="fa fa-pencil"></i><span class="hide-menu">Scan Kehadiran</span></a>
+                                    class="fa fa-camera"></i><span class="hide-menu">Scan Kehadiran</span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="{{url('overData')}}" aria-expanded="false"><i
-                                    class="fa fa-info"></i><span class="hide-menu">Data Over</span></a>
+                        <li> <a class="waves-effect waves-dark" href="{{url('updateByAdmin')}}" aria-expanded="false"><i
+                                    class="fa fa-pencil"></i><span class="hide-menu">Manual Kehadiran</span></a>
+                        </li>
+                        <!-- <li> <a class="waves-effect waves-dark" href="{{url('overData')}}" aria-expanded="false"><i
+                                    class="fa fa-info"></i><span class="hide-menu">Data Over</span></a> -->
                         </li>
                         <li> <a class="waves-effect waves-dark" href="{{url('allData')}}" aria-expanded="false"><i
                                     class="fa fa-check-square-o"></i><span class="hide-menu">Data Konfirmasi </span></a>

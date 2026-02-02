@@ -1,94 +1,61 @@
-@extends("layout.app")
+@extends('dashboard.app')
 
 @section('content')
-<div class="main-banner" id="top">
-    <div class="contact-us section up">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="col-lg-12 text-center">
-                        <div class="section-heading mb-5 justify-content-center align-items-center">
-                            <h2 class="cek ps-2">Family Gathering 2024</h2>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Kehadiran Manual</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">Kehadiran</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material mx-2" action="{{ route('update', $data->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label class="col-md-12">NPK</label>
+                            <div class="col-md-12">
+                                <input type="text" readonly class="form-control form-control-line" value="{{ $data->NPK }}" name="npk">
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-us-content" id="register">
-                        <div class="pt-1 pb-5 justify-content-center text-center">
-                            <h2 class="cek">Update Data</h2>
+                        
+                         <div class="form-group">
+                            <label class="col-md-12">Nama</label>
+                            <div class="col-md-12">
+                                <input type="text" readonly class="form-control form-control-line" value="{{ $data->namaKaryawan }}">
+                            </div>
                         </div>
-                        <form action="{{ route('update', $data->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <div class="row justify-content-center justify-items-center mb-3">
-                                <div class="col-12 col-md-6">
-                                    <div class="pt-3 cek">NPK</div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <input readonly="readonly" value="{{ $data->NPK }}" class="form-control" type="text" name="NPK" id="name" placeholder="Insert Your NPK here" autocomplete="on" required>
-                                </div>
+                        
+                        
+                        <div class="form-group">
+                            <label class="col-md-12">Kehadiran</label>
+                            <div class="col-md-12">
+                                <select class="form-select mt-2" aria-label="Default select example" name="kehadiran" id="transportasi" onchange="showJemput()">
+                                    <option value="1">Hadir</option>
+                                    <option value="0">Tidak Hadir</option>
+                                </select>
                             </div>
-
-                            <div class="row justify-content-center justify-items-center mb-3">
-                                <div class="col-12 col-md-6">
-                                    <div class="pt-3 cek">Total anak dan (Istri/Suami)</div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <input class="form-control" type="number" value="{{ $data->totalKeluarga }}" name="totalKeluarga" id="spouse" placeholder="" required>
-                                </div>
+                        </div>
+                        
+                       
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
-
-                            <div class="row justify-content-center justify-items-center mb-3">
-                                <div class="col-12 col-md-6">
-                                    <div class="pt-3 cek">Transportasi</div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <select class="form-select mt-2" aria-label="Default select example" name="additionalSelect" id="additionalSelect" onchange="showJemput()">
-                                        <option value="pribadi">Kendaraan Pribadi</option>
-                                        <option value="bus">Bus</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-center justify-items-center mb-3" id="jemput" style="display: none;">
-                                <div class="col-12 col-md-6">
-                                    <div class="pt-3 cek">Titik Jemput</div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <select class="form-select mt-2" aria-label="Default select example" name="jemputSelect" id="jemputSelect">
-                                        <option value="cikarang">Cikarang</option>
-                                        <option value="serang">Serang</option>
-                                        <option value="balaraja">Balaraja</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 text-center mt-5">
-                                <fieldset>
-                                    <button type="submit" id="konfirmasi" style="margin-bottom: 100px;" class="btn btL me-2  ">Update</button>
-                                </fieldset>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        var button = document.getElementById('konfirmasi');
-        button.disabled = true;
-    });
 
-    function showJemput() {
-        var additionalSelect = document.getElementById('additionalSelect');
-        var jemput = document.getElementById('jemput');
-        if (additionalSelect.value === 'bus') {
-            jemput.style.display = 'flex';
-        } else {
-            jemput.style.display = 'none';
-        }
-    }
-</script>
 @endsection

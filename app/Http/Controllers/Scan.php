@@ -10,7 +10,7 @@ class Scan extends Controller
     
     public function postScanPresensi(Request $request){
 
-        
+     
         $updated = DB::table('registrasis')
             ->where('id', $request->id)
             ->update(['hadir' => 1]);
@@ -24,8 +24,11 @@ class Scan extends Controller
 
     public function manualPresensi(Request $request){
 
+        
         date_default_timezone_set('Asia/Jakarta');
-        $updated = DB::table('registrasis')
+        try{
+            DB::beginTransaction();
+            $updated = DB::table('registrasis')
             ->where('NPK', $request->npk)
             ->update([
                 'hadir' => 1,
@@ -34,14 +37,15 @@ class Scan extends Controller
             
             ]);
 
-        
-        if ($updated == 1) {
-             $request->session()->flash('done', 'Data Kehadiran telah di update');
-              return view('manual');
-
-        } else {
-            $request->session()->flash('warning', 'Data Kehadiran telah kerecord');
-              return view('manual');
+            
+            DB::commit();
+                $request->session()->flash('done', 'Data Kehadiran telah di update');
+                return view('manual');
+        }
+        catch( \Exception $e){
+            DB::rollBack();
+            $request->session()->flash('warning', 'Data record bermasalah');
+                return view('manual');
         }
 
     }
@@ -50,63 +54,91 @@ class Scan extends Controller
     public function verif($id, Request $request){
 
 
-        $regist = DB::table('registrasis')->join('karyawan', 'registrasis.npk', '=', 'karyawan.npk')->select('registrasis.*','karyawan.namaKaryawan', DB::raw('karyawan.Spouse + karyawan.Children as BaseData '))->where('id', $id)->get();
-      
-    
-        if($regist[0]->hadir == 0){
-              return view('verif',['data'=>$regist]);
+        $regist = DB::table('registrasis')->where('id', $id)->where('hadir', 0)->first();
+
+      if ($regist) {
+            DB::table('registrasis')
+        ->where('id', $id)
+        ->update(['hadir' => 1]);
+            return back()->with('done', 'Data Presensi Berhasil');
         }
         else{
-              $request->session()->flash('warning', 'Data Kehadiran sudah diisi');
-              return view('manual');
+
+             return back()->with('warning', 'Presensi sudah pernah dilakukan');
         }
 
-      
 
+      
+  
     }
 
     public function scan(){
         return view('manual');
     }
 
-     public function edit($id)
+     public function edit(Request $request)
     {
+   
+   
+         $data = DB::table('registrasis')
+        ->join('karyawans', 'registrasis.NPK', '=', 'karyawans.NPK')
+        ->where('registrasis.NPK', $request->npk) // Specify the table name for NPK
+        ->first();
         
-        $data = DB::table('registrasis')->where('id', $id)->first();
-        
+
+         if (!$data) {
+        session()->flash('notification', 'Data not found for NPK ' . $request->npk);
+        return redirect()->back();
+        }
+    
         return view('updateData', compact('data'));
+        //  return view('mt');
     }
 
     public function update(Request $request, $id)
     {
-       
-    
-      
-        // Validate the request
-         $titikJemput = $request->input('additionalSelect') === 'pribadi' ? null : $request->input('jemputSelect');
+  
 
-      
-         
-    // Update the record
-    $cek = DB::table('registrasis')
-        ->where('id', $id)
-        ->update([
-            'NPK' => $request->input('NPK'),
-            'totalKeluarga' => $request->input('totalKeluarga'),
-            'Transportasi' => $request->input('additionalSelect'),
-            'titikJemput' => $titikJemput,
-            // Add other fields as needed
-        ]);
-       
+             // Validate the request
+         $existingRecord = DB::table('registrasis')->where('id', $id)->first();
 
-        if ($cek) {
-        // Flash a success message
-        $request->session()->flash('success', 'Data berhasil diperbarui.');
-    } else {
-        // Flash an error message if update fails
-        $request->session()->flash('error', 'Gagal memperbarui data.');
+   
+     
+
+        // Check if there are any changes
+        $hasChanges = (
+
+            $existingRecord->hadir != $request->kehadiran
+        );
+        
+
+        if ($hasChanges) {
+            // Update the record
+            $cek = DB::table('registrasis')
+                ->where('id', $id)
+                ->update([
+                    'hadir' => $request->kehadiran,
+                   
+                    // Add other fields as needed
+                ]);
+        
+            if ($cek) {
+                // Flash a success message
+                $request->session()->flash('success', 'Data berhasil diperbarui.');
+            } else {
+                // Flash an error message if update fails
+                $request->session()->flash('error', 'Gagal memperbarui data.');
+            }
+        } else {
+            // Flash a message indicating no changes were made
+            $request->session()->flash('info', 'Tidak ada perubahan pada data.');
+        }
+
+        return redirect()->route('updateByAdmin');
     }
 
-    return redirect()->route('cekTiket');
+
+    public function updateByAdmin(){
+        return view('update');
     }
 }
